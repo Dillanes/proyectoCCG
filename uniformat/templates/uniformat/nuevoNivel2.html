@@ -1,0 +1,30 @@
+{% extends "ProyectoCCGApp/base.html" %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <div class="card-footer text-center" style="position: absolute; left: 1; ">
+        <a href="{% url 'nivel2' nivel1_id %}" class="btn btn-secondary btn-sm">Volver</a>
+    </div>
+        
+    <form action="" method="POST" style="color: white;">
+
+        {% csrf_token %}
+
+        <div style="width: 50%; margin: auto;">
+            <h1 style="text-align: center;"> Agregar Nivel 2</h1>
+
+            {{formaNivel2|crispy}}
+
+            <button type="submit" class="btn btn-primary">Agregar</button>
+
+        </div>
+        
+    </form>
+   
+    
+
+{% endblock %}

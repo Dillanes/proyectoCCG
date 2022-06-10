@@ -1,0 +1,34 @@
+{% extends 'registration/login.html' %} 
+{% load static %} 
+{% block Contenedor %}
+{% block menuregistro %}
+
+{% endblock %}
+<div class="admin-header">
+    <i class="fa-solid fa-bars icon-bar"></i>
+    <ul class="lista-admin">
+        
+        <a href="{% url 'adminUsers' %}" class="a-items"><li>PERFIL</li></a>
+        <a href="" class="a-items"><li>COSTOS</li></a>
+        <a href="" class="a-items"><li>PROYECTOS</li></a>
+    </ul>      
+</div>
+
+<div class="form-ditar-conten" style="text-align:center;">
+    {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li class="{{ message.tags }}" style="background-color: blue; width: 500px; margin: auto; list-style: none;">{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+<form method="post" class="form-edit">
+    {% csrf_token %}
+
+    {{form}}
+    <input type="reset" value="Cancelar">
+    <input type="submit">
+</form>
+</div>
+<script src="{% static 'StylesLogin\js\adminpage.js' %}"></script>
+{% endblock %}

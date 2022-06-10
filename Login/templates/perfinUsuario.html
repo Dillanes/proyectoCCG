@@ -1,0 +1,31 @@
+
+
+{%load static%} 
+
+<div class="container">
+ <b>PERFIL</b>
+
+ {% if invitado %}
+<ul style="font-size:25px">
+    <li><label>Nombre:</label><b>{{invitado.nombre}}</b></li>
+    <li><label>Apellido Paterno:</label><b>{{invitado.paterno}}</b></li>
+    <li><label>Apellido Materno:</label><b>{{invitado.materno}}</b></li>
+    <li><label>Cargo:</label><b style="color: red;">{{invitado.cargo}}</b></li>
+    <li><label>Telefono:</label><b>{{invitado.cel}}</b></li>
+    <li><label>Organizacion de Procedencia:</label><b>{{invitado.orgprocedencia}}</b></li>
+    <li><label>Descripcion:</label><b>{{invitado.descripcion}}</b></li>
+</ul>
+
+
+ {% endif %}
+
+ {% if personal %}
+ <ul style="font-size:25px">
+    <li><label>Nombre:</label><b>{{personal.nombre}}</b></li>
+    <li><label>Apellido Paterno:</label><b>{{personal.paterno}}</b></li>
+    <li><label>Apellido Materno:</label><b>{{personal.materno}}</b></li>
+    
+</ul>
+ {% endif %}
+ <a href="{% url 'adminUsers' %}">Regresar</a>
+</div>

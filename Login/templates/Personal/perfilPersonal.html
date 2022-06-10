@@ -1,0 +1,135 @@
+{% extends 'Personal/inicioPersonal.html' %}
+{% load static %}
+{% if request.session.idpersonal %}
+
+{% block container %}
+ 
+
+
+<div class="content-formularioR">
+       
+    <form method="post" class="form-control" id="fomularioE" autocomplete="off">
+      {% csrf_token %}
+      <div class=" headerformE">PERFIL DEL EMPLEADO</div>   
+      <div class="content-datos">
+        <h3 class="datos-personalesE">Datos Personales:</h3>
+      
+              <label>Nombre:</label> 
+              {{formP.nombre}}
+              <label>Apellido Paterno:</label> 
+              {{formP.paterno}}
+              <label>Apellido Materno:</label> 
+              {{formP.materno}}
+              <label>Genero: </label>
+              {{formP.genero}}
+              <label>Fecha de Nacimiento: </label>
+              {{formP.fechanac}}
+              <label>Lugar de Nacimiento: </label>
+              {{formP.lugarnac}}
+              <label>RFC: </label>
+              {{formP.rfc}}
+              <label>CURP:  </label>
+              {{formP.curp}}
+              <label>Telefono:</label> 
+              {{formP.cel}}
+      </div>
+         <hr>
+        
+         
+         
+     <div class="direction-content">
+                 <h3 class="datos-personalesED">Datos Personales:</h3>
+                  <div class="direccion-cnn">
+                  <label>Calle:</label> {{formP.calle}}
+                  <label>Numero Interio:</label> {{formP.noint}}
+                  <label>Numero Exterior:</label> {{formP.noext}}
+                  </div>
+                  <br>
+                  <br>
+                  <div class="content-paises">
+                    <!-- SELECT PAIS -->
+                    <label>PAIS
+                        <select class="select-list" id="item_pais">
+                          <option value ="">------</option>
+                            {% for item_pais in pais%}
+                              <option value="{{item_pais.idpais}}">
+                               {{item_pais.nombre}}
+                              </option>
+                            {%endfor%}
+                        </select>
+                    </label>
+            
+                <!-- SELECT ESTADO -->
+                    <label>ESTADO
+                        <select class="select-list" id="item_estado">
+                          <option value ="">------</option>
+                            {% for item_estado in estado%}
+                              <option value="{{item_estado.idestado}}" data-chained="{{item_estado.fk_pais}}">
+                                {{item_estado.nombre}}
+                              </option>
+                            {%endfor%}
+                        </select>
+                    </label>
+            
+                     <!-- MUNICPIO -->
+                    <label>MUNICIPIO
+                        <select class="select-list" id="item_municipio" name="mundeleg">
+                          <option value ="">------</option>
+                            {% for item_municipio in municipio%}
+                              <option value="{{item_municipio.idmundeleg}}" data-chained="{{item_municipio.fk_estado}}">
+                                {{item_municipio.nombre}}
+                              </option>
+                            {%endfor%}
+                        </select>
+                    </label>
+            
+                 <!-- SELECT CODIGO POSTAL -->
+                    <label>CODIGO POSTAL
+                      <select class="select-list" id="item_cp" name="cp">
+                         <option value ="">------</option>
+                           {% for item_cp in cp%}
+                             <option value="{{item_cp.cp}}" data-chained="{{item_cp.fk_mpiodel}}">
+                               {{item_cp.cp}}
+                             </option>
+                           {%endfor%}
+                      </select>
+                    </label>
+                </div>
+         <hr>
+            <div class="content-credenciales">
+              <h3>Credenciales de Ingreso</h3>
+     
+               <label>Usuario: {{formU.username}}</label>   
+
+               <label>Contraseña: {{formU.password}} </label>
+               
+               
+            
+            </div>
+                 <center> <input type="button" value="Editar" class="bt-editar"></center>
+                 <center> <input type="submit" value="Guardar" class="bt-enviar-registro"></center>
+                 {% if messages %}
+                 <ul class="messages">
+                   {% for message in messages %}
+                     <li class="{{ message.tags }}" style="background-color: rgb(235, 104, 104); position: absolute; bottom: 0; line-height: 40px; font-size: 25px; height: 40px; text-align: center; width: 100%; margin: auto; list-style: none; color: white;">{{ message }}</li>
+                   {% endfor %}
+                 </ul>
+               {% endif %}
+    </form>
+  </div>
+          <!-- <script src="{% static 'js/jquery.chained' %}"></script> -->
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script src="{% static 'StylesLogin/js/chained.js'%}"></script>
+  <script src="{%static 'StylesLogin/js/validacionFormEmpleado.js'%}"></script>
+  <script>
+        $(function() {
+           $('#item_estado').chained('#item_pais');
+            $('#item_municipio').chained('#item_estado');
+           $('#item_cp').chained('#item_municipio');
+
+        })
+  </script>
+{% endblock %}
+{% else %}
+<h1>MAMASTE</h1>
+{% endif %}

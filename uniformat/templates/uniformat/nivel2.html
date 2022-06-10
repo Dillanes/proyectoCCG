@@ -1,0 +1,62 @@
+{% extends "ProyectoCCGApp/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+    {% include "barra_busqueda/busqueda.html" %}
+
+    <div class="card-footer text-center" style="position: absolute; left: 1; ">
+        <a href="{% url 'Uniformat' %}" class="btn btn-secondary btn-sm">Nivel anterior</a>
+    </div>
+    <div class="card-footer text-center" style="position: absolute; right: 1%; ">
+        <a href="{% url 'agregarNivel2' nivel2_id %}" class="btn btn-success btn-lg">Agregar</a>
+    </div>
+    
+    
+    <div style="margin-top: 10px; margin-left: 7%; margin-right: 8%;">
+
+        <table class = "table table-bordered" style="color: white;">
+            <thead class="thead-dark">
+                <tr>
+                    <th colspan="6" class="text-center">
+                        UNIFORMAT NIVEL 2
+                    </th>
+                </tr>
+
+                <tr>
+                    <th>Código</th>
+                    <th>Descripción en Español</th>
+                    <th>Descripción en Inglés</th>
+                    <th>Explicación en Español</th>
+                    <th>Explicación en Inglés</th>
+                    <th></th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+                {% for UFTNivel2 in UFTNivels2 %}
+
+                <tr>
+                    <td>{{UFTNivel2.Codigo}}</td>
+                    <td>{{UFTNivel2.descriSpa}}</td>
+                    <td>{{UFTNivel2.descriEng}}</td>
+                    <td>{{UFTNivel2.explicacionSpa}}</td>
+                    <td>{{UFTNivel2.explicacionEng}}</td>
+                    <td style=" border: none; width:230;">
+                        <a href="{% url 'nivel3' UFTNivel2.idUftN2 nivel2_id %}" class="btn btn-sm btn-secondary">Nivel 3</a>
+                        <a href="{% url 'editarNivel2' UFTNivel2.idUftN2 nivel2_id %}" class="btn btn-sm btn-info">Editar</a>
+                        <a href="{% url 'eliminarNivel2' UFTNivel2.idUftN2 nivel2_id %}" class="btn btn-sm btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,45 @@
+{% load static %}
+{% if request.session.usernameP %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'StylesLogin/css/stylesPersonal.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    {% block condicion %}{% endblock %}
+    <div class="container">
+         <nav class="barra-nav">
+             
+             <i class="fa-solid fa-bars icon-bar"></i>
+            <ul class="ul-list"> 
+                <img class="avatar" src="https://png.pngtree.com/png-vector/20200706/ourlarge/pngtree-businessman-user-character-vector-illustration-png-image_2298565.jpg">
+                <div class="name-user-nav"><h3>{{request.session.usernameP}}</h3></div>
+                <li class="items-li"><a href="{% url 'personal' %}">Inicio</a></li>
+                <li class="items-li"><a href="{% url 'perfilPersonal' %}">Perfil</a></li>
+                <li class="items-li"><a href="#">Costos</a></li>
+                <li class="items-li"><a href="#">Proyectos</a></li>
+                <li class="items-li"><a href="{% url 'logout' %}">Salir</a></li>
+             </ul>
+
+         </nav>
+         {% block container %}
+         
+         
+         <div>
+             perfil de inicio
+         </div>
+         {% endblock %}
+    </div>
+    <script src="{% static 'StylesLogin/js/codPersonal.js' %}"></script>
+
+    {% else %}
+       <div>NO TE HAZ LOGUEADO</div>
+       <a href="{% url 'index' %}">Regresar</a>
+    {% endif %}
+</body>
+</html>

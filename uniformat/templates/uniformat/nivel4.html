@@ -1,0 +1,65 @@
+{% extends "ProyectoCCGApp/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+    {% include "barra_busqueda/busqueda.html" %}
+    
+    <div class="card-footer text-center" style="position: absolute; left: 1; ">
+        <a href="{% url 'nivel3' nivel_ant nivel_ant_ant %}" class="btn btn-sm btn-secondary">Nivel anterior</a>
+    </div>
+    <div class="card-footer text-center" style="position: absolute; right: 1%; ">
+        <a href="{% url 'agregarNivel4' nivel4_id nivel_ant nivel_ant_ant %}" class="btn btn-success btn-lg">Agregar</a>
+    </div>
+        
+
+    <div  style="margin-top: 10px; margin-left: 7%; margin-right: 8%;">
+
+        <table class = "table table-bordered" style="color: white;">
+            <thead class="thead-dark">
+                <tr>
+                    <th colspan="7" class="text-center">
+                        UNIFORMAT NIVEL 4
+                    </th>
+                </tr>
+
+                <tr>
+                    <th>Código</th>
+                    <th>Descripción en Español</th>
+                    <th>Descripción en Inglés</th>
+                    <th>Explicación en Español</th>
+                    <th>Explicación en Inglés</th>
+                    <th>Observaciones</th>
+                    <th></th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+                {% for UFTNivel4 in UFTNivels4 %}
+
+                <tr>
+                    <td>{{UFTNivel4.Codigo}}</td>
+                    <td>{{UFTNivel4.descriSpa}}</td>
+                    <td>{{UFTNivel4.descriEng}}</td>
+                    <td>{{UFTNivel4.explicacionSpa}}</td>
+                    <td>{{UFTNivel4.explicacionEng}}</td>
+                    <td>{{UFTNivel4.Observaciones}}</td>
+                    <td style="border: none; width:230;">
+                        <a href="#" class="btn btn-sm btn-secondary">Nivel 5</a>
+                        <a href="{% url 'editarNivel4' UFTNivel4.idUftN4 nivel4_id nivel_ant nivel_ant_ant %}" class="btn btn-sm btn-info">Editar</a>
+                        <a href="{% url 'eliminarNivel4' UFTNivel4.idUftN4 nivel4_id nivel_ant nivel_ant_ant %}" class="btn btn-sm btn-danger">Eliminar</a>
+                        
+                    </td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+{% endblock %}

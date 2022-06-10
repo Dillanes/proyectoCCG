@@ -1,0 +1,54 @@
+{% extends "ProyectoCCGApp/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+    {% include "barra_busqueda/busqueda.html" %}
+
+    <div class="card-footer text-center" style="position: absolute; right: 1%; ">
+        <a href="{% url 'agregarCategoria' %}" class="btn btn-success btn-lg">Agregar</a>
+    </div>
+    
+    <div style="margin-top: 10px; margin-left: 7%; margin-right: 8%;">
+
+        <table class = "table table-bordered" style="color: white;">
+            <thead class="thead-dark">
+                <tr>
+                    <th colspan="4" class="text-center">
+                        UNIFORMAT
+                    </th>
+                </tr>
+
+                <tr>
+                    <th>Código</th>
+                    <th>Descripción en Español</th>
+                    <th>Descripción en Inglés</th>
+                    <th></th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+                {% for UFTCategoria in UFTCategorias %}
+
+                <tr>
+                    <td>{{UFTCategoria.Codigo}}</td>
+                    <td>{{UFTCategoria.descriSpa}}</td>
+                    <td>{{UFTCategoria.descriEng}}</td>
+                    <td style="border: none; width:230;">
+                        <a href="{% url 'nivel2' UFTCategoria.idUftCat %}" class="btn btn-sm btn-secondary">Nivel 2</a>
+                        <a href="{% url 'editarCategoria' UFTCategoria.idUftCat %}" class="btn btn-sm btn-info">Editar</a>
+                        <a href="{% url 'eliminarCategoria' UFTCategoria.idUftCat %}" class="btn btn-sm btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+{% endblock %}
